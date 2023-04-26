@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Plots Page</title>
+    <link rel="stylesheet" type="text/css" href="../static/styles.css">
+	<style>
+		body {
+			background-color: #1a1a1a;
+			color: #fff;
+			font-family: sans-serif;
+		}
+
+		h2 {
+			margin-top: 2rem;
+			margin-bottom: 1rem;
+		}
+
+		.plot-container {
+			margin-bottom: 2rem;
+		}
+	</style>
+</head>
+<body>
+	<div class="plot-container">
+		<h2>Waveform Plot</h2>
+		{{ waveform_html | safe }}
+	</div>
+
+	<div class="plot-container">
+		<h2>Spectrogram Plot</h2>
+		{{ spectrogram_html | safe }}
+	</div>
+</body>
+</html>
