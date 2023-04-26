@@ -34,9 +34,9 @@ def start_recording():
 
 @app.route('/mic_record')
 def mic_record():
-        FRAMES_PER_BUFFER = 3200
+        FRAMES_PER_BUFFER = 1024
         FORMAT = pyaudio.paInt16
-        CHANNELS = 1
+        CHANNELS = 2
         RATE = 16000
         p = pyaudio.PyAudio()
         
