@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Download Audio</title>
+</head>
+<body>
+    <h1>Recording saved as {{ filename }}</h1>
+    <a href="{{ url_for('static', filename='uploads/' + filename) }}" download>Download</a>
+</body>
+</html>

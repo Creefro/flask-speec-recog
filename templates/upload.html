@@ -1,0 +1,18 @@
+<html>
+<head>
+	<title>upload the file : GFG</title>
+</head>
+<body>
+	<div>
+		<form action = "/success" method = "post" enctype="multipart/form-data">
+			<input type="file" name="file" />
+			<input type = "submit" value="Upload">
+		</form>
+	</div>
+	<div>
+        <form action="{{ url_for('mic_record') }}" method="POST">
+          <button type="submit">Record</button>
+      </form>
+      </div>
+</body>
+</html>
