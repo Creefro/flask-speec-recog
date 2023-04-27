@@ -2,6 +2,9 @@ const recordBtn = document.querySelector(".record");
 const predictBtn = document.querySelector(".predict");
 const clearBtn = document.querySelector(".clear");
 
+const fileInput = document.getElementById('file-input');
+const fileNameDisplay = document.getElementById('audioname');
+const audioFilenameInput = document.getElementById('audio_name');
 
 let recording = false;
 
@@ -42,11 +45,6 @@ function stopRecording() {
   predictBtn.disabled = false;
 }
 
-const fileInput = document.getElementById('file-input');
-const fileNameDisplay = document.getElementById('audioname');
-const audioFilenameInput = document.getElementById('audio_name');
-
-
 recordBtn.addEventListener("click", () => {
   if (!recording) {
     startRecording();
@@ -55,15 +53,14 @@ recordBtn.addEventListener("click", () => {
   }
 });
 
-
-  fileInput.addEventListener('change', function() {
-    fileNameDisplay.textContent = 'File: ' + this.files[0].name;
-    predictBtn.disabled = false;
-    audioFilenameInput.value = this.files[0].name;
-  });
+fileInput.addEventListener('change', function() {
+  fileNameDisplay.textContent = 'File: ' + this.files[0].name;
+  predictBtn.disabled = false;
+  audioFilenameInput.value = this.files[0].name;
+});
 
 clearBtn.addEventListener("click", () => {
   fileNameDisplay.textContent = 'File: ';
   predictBtn.disabled = true;
+  fileInput.value="";
 });
-
