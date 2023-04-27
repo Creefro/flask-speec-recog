@@ -62,35 +62,6 @@ recordBtn.addEventListener("click", () => {
     audioFilenameInput.value = this.files[0].name;
   });
 
-
-function download() {
-  const text = result.innerText;
-  const filename = "speech.txt";
-  const audioBlob = new Blob(chunks, { type: "audio/mpeg" }); // değişiklik yapıldı
-  const audioUrl = window.URL.createObjectURL(new Blob(chunks, {type: 'audio/mpeg'}));
-  const audioFilename = "speech.mp3"; // uzantı .mp3 olarak değiştirildi
-
-  const element = document.createElement("a");
-  element.setAttribute(
-    "href",
-    "data:text/plain;charset=utf-8," + encodeURIComponent(text)
-  );
-  element.setAttribute("download", filename);
-  element.style.display = "none";
-  document.body.appendChild(element);
-  element.click();
-  document.body.removeChild(element);
-
-  const audioElement = document.createElement("a");
-  audioElement.setAttribute("href", audioUrl);
-  audioElement.setAttribute("download", audioFilename);
-  audioElement.style.display = "none";
-  document.body.appendChild(audioElement);
-  audioElement.click();
-  document.body.removeChild(audioElement);
-}
-
-
 clearBtn.addEventListener("click", () => {
   fileNameDisplay.textContent = 'File: ';
   predictBtn.disabled = true;
