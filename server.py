@@ -6,21 +6,16 @@ import numpy as np
 import plotly.graph_objs as go
 import plotly.io as pio
 import os
+from glob import glob
+import threading
 
 app = Flask(__name__)
 
 @app.route('/')
 def main():
-	return render_template("aa.html")
+	return render_template("index.html")
 
-"""@app.route('/success', methods = ['POST'])
-def success():
-	if request.method == 'POST':
-		f = request.files['file']
-		f.save(f.filename)
-		return render_template("Acknowledgement.html", name = f.filename)
-        """
-from glob import glob
+
 
 @app.route('/get_last_recorded_filename')
 def get_last_recorded_filename():
@@ -31,17 +26,10 @@ def get_last_recorded_filename():
     files = sorted(files, key=lambda f: int(os.path.splitext(f)[0][len("record"):]), reverse=True)
     return files[0]
 
-@app.route('/<FUNCTION>')
-def command(FUNCTION=None):
-    print("")
-    exec(FUNCTION.replace("<br>", "\n"))
-    return ""
-
 FRAMES_PER_BUFFER = 1024
 FORMAT = pyaudio.paInt16
 CHANNELS = 2
 RATE = 16000
-import threading
 @app.route('/mic_record/<action>')
 def mic_record(action):
     is_recording = False
@@ -99,13 +87,13 @@ def mic_record(action):
         print("not recording")
     return ""
 
-@app.route('/success', methods = ['POST'])
+@app.route('/prediction', methods = ['POST'])
 def success():
     if request.method == 'POST':
-        f = request.files['file']
-        f.save(f.filename)
-        waveform_html, spectrogram_html = generate_plots(f.filename)
-        return render_template("plots.html", name=f.filename, waveform_html=waveform_html, spectrogram_html=spectrogram_html)
+        data = request.form['audio_name']
+        print(data)
+        waveform_html, spectrogram_html = generate_plots(data)
+        return render_template("prediction.html", name=data, waveform_html=waveform_html, spectrogram_html=spectrogram_html)
 
 
 def generate_plots(filename):

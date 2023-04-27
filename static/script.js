@@ -1,5 +1,6 @@
 const recordBtn = document.querySelector(".record");
-
+const predictBtn = document.querySelector(".predict");
+const clearBtn = document.querySelector(".clear");
 
 
 let recording = false;
@@ -30,17 +31,21 @@ function stopRecording() {
         var fileName = this.responseText;
         if (fileName) {
           fileNameDisplay.textContent = "File: " + fileName;
+          audioFilenameInput.value = fileName;
           clearInterval(checkInterval);
+
         }
       }
     };
     request.send();
   }, 500);
+  predictBtn.disabled = false;
 }
-
 
 const fileInput = document.getElementById('file-input');
 const fileNameDisplay = document.getElementById('audioname');
+const audioFilenameInput = document.getElementById('audio_name');
+
 
 recordBtn.addEventListener("click", () => {
   if (!recording) {
@@ -53,6 +58,8 @@ recordBtn.addEventListener("click", () => {
 
   fileInput.addEventListener('change', function() {
     fileNameDisplay.textContent = 'File: ' + this.files[0].name;
+    predictBtn.disabled = false;
+    audioFilenameInput.value = this.files[0].name;
   });
 
 
@@ -84,10 +91,8 @@ function download() {
 }
 
 
-
-downloadBtn.addEventListener("click", download);
-
 clearBtn.addEventListener("click", () => {
-  result.innerHTML = "";
-  downloadBtn.disabled = true;
+  fileNameDisplay.textContent = 'File: ';
+  predictBtn.disabled = true;
 });
+
