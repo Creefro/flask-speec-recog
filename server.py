@@ -86,7 +86,7 @@ def mic_record(action):
             p.terminate()
 
             # write the frames to a WAV file
-            recfilename = "record" + str(len(os.listdir())-13) + ".wav"
+            recfilename = "record" + str(len(os.listdir())-9) + ".wav"
             wf = wave.open(recfilename, 'wb')
             wf.setnchannels(CHANNELS)
             wf.setsampwidth(p.get_sample_size(FORMAT))
@@ -136,7 +136,7 @@ def generate_plots(filename):
 
 
 class_names = config.cn
-model = tf.keras.models.load_model('./models/students/v4/model.h5')
+model = tf.keras.models.load_model('./models/model.h5')
 
 
 def paths_to_dataset(audio_paths):
